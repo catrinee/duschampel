@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #display {
+            width: 150px;
+            height: 150px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    Vebrauch in Liter pro Sekunde: <br>
+    <input type="text" name="verbrauch" id="verbrauch">
+
+    <br>
+    <br>
+
+    Ich möchte höchstens x Liter verbrauchen: <br>
+    <input type="text" name="max_verbrauch" id="max_verbrauch">
+
+    <br><br>
+
+    <button id="start">START</button>
+
+    <br><br>
+
+    <div id="display"></div> 
+    <div id="aVerbrauch"></div>
+</body>
+
+<script>
+    var button = document.getElementById('start')
+    var display = document.getElementById('display')
+    var verbrauch = document.getElementById('verbrauch')
+    var max_verbrauch = document.getElementById('max_verbrauch')
+    var aVerbrauch = document.getElementById('aVerbrauch')
+
+    var verbrauch_in_liter_pro_sekunde = 0.5
+    var orange_limit_threshold_in_liter = 10
+    var red_limit_threshold_in_liter = 20
+
+    var verbrauch_in_liter = 0
+    var zeit_geduscht_in_sekunden = 0
+
+    var totalSeconds = 0;
+
+    function startShowering() {
+        ++totalSeconds;
+        verbrauch_in_liter = verbrauch_in_liter + parseFloat(verbrauch.value)
+        aVerbrauch.innerHTML = verbrauch_in_liter
+
+        if (verbrauch_in_liter < orange_limit_threshold_in_liter) {
+            display.style.backgroundColor = 'green';
+        }
+
+        if (verbrauch_in_liter >= parseFloat(max_verbrauch.value) / 2) {
+            display.style.backgroundColor = 'orange';
+        }
+
+        if (verbrauch_in_liter >= parseFloat(max_verbrauch.value)) {
+            display.style.backgroundColor = 'red';
+        }
+    }
+
+    button.addEventListener('click', function() {
+        setInterval(startShowering, 1000);
+    })
+</script>
+
+</html>
