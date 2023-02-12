@@ -50,17 +50,9 @@
     var max_verbrauch = document.getElementById('max_verbrauch')
     var aVerbrauch = document.getElementById('aVerbrauch')
 
-    var verbrauch_in_liter_pro_sekunde = 0.5
-    var orange_limit_threshold_in_liter = 10
-    var red_limit_threshold_in_liter = 20
-
     var verbrauch_in_liter = 0
-    var zeit_geduscht_in_sekunden = 0
-
-    var totalSeconds = 0;
 
     function startShowering() {
-        ++totalSeconds;
         verbrauch_in_liter = verbrauch_in_liter + parseFloat(verbrauch.value);
         aVerbrauch.innerHTML = Number(verbrauch_in_liter).toFixed(0) + ' Liter verbraucht';
 
