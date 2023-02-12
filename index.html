@@ -7,14 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        body {
+            max-width: 310px;
+            margin: auto;
+            margin-top: 30px;
+        }
         #display {
             width: 150px;
             height: 150px;
             background-color: white;
+            border: 1px solid black;
         }
     </style>
 </head>
 <body>
+    <h1>Duschampel</h1>
+    <br>
+
     Vebrauch in Liter pro Sekunde: <br>
     <input type="text" name="verbrauch" id="verbrauch">
 
@@ -52,10 +61,10 @@
 
     function startShowering() {
         ++totalSeconds;
-        verbrauch_in_liter = verbrauch_in_liter + parseFloat(verbrauch.value)
-        aVerbrauch.innerHTML = verbrauch_in_liter
+        verbrauch_in_liter = verbrauch_in_liter + parseFloat(verbrauch.value);
+        aVerbrauch.innerHTML = Number(verbrauch_in_liter).toFixed(0) + ' Liter verbraucht';
 
-        if (verbrauch_in_liter < orange_limit_threshold_in_liter) {
+        if (verbrauch_in_liter < parseFloat(max_verbrauch.value) / 2) {
             display.style.backgroundColor = 'green';
         }
 
@@ -69,6 +78,11 @@
     }
 
     button.addEventListener('click', function() {
+        if (verbrauch.value === '' || max_verbrauch.value === '') {
+            alert('Bitte ausfüllen!')
+            return;
+        } 
+
         setInterval(startShowering, 1000);
     })
 </script>
